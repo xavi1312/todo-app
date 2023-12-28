@@ -21,6 +21,7 @@
 
   /* Light mode */
   --color-background: var(--color-very-light-gray);
+  --color-text: var(--color-very-dark-grayish-blue3);
 
   font-family: 'Josefin Sans', sans-serif;
   font-weight: 400;
@@ -37,13 +38,17 @@
   :root {
     /* Dark mode */
     --color-background: var(--color-very-dark-blue);
+    --color-text: var(--color-very-dark-blue);
   }
 }
 
 body {
   margin: 0;
   min-height: 100vh;
-  font-size: 1.125rem:
+  font-size: 1.125rem;
+
+  background-color: var(--color-background);
+  color: var(--color-text);
 }
 
 * {
