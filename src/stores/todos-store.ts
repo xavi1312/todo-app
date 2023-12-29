@@ -36,7 +36,7 @@ const todos = ref<Todo[]>([
 
 export function useTodosStore () {
   function addTodo (todo: Todo) {
-    todos.value = [...todos.value, todo]
+    todos.value = [todo, ...todos.value]
   }
 
   function deleteTodo (id: Todo['id']) {

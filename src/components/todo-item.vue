@@ -64,6 +64,8 @@ function onChange (ev: Event) {
 
   font-weight: 600;
 
+  background-color: var(--color-background);
+
   & label {
     display: flex;
     align-items: center;

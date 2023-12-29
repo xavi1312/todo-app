@@ -72,10 +72,6 @@ const todos = computed(() => {
 
 <style scoped>
 .todo-list {
-  margin: 0 auto;
-  margin-top: 40px;
-  max-width: 540px;
-
   overflow: hidden;
   border-radius: 8px;
 
