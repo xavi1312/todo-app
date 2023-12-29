@@ -4,9 +4,8 @@ import IconX from './icons/icon-x.vue'
 
 interface Props {
   label: string
-  value: string
   isCompleted: boolean
-  hasRemove: boolean
+  hasRemove?: boolean
 }
 interface Emits {
   (ev: 'update:isCompleted', isCompleted: Props['isCompleted']): void
@@ -32,7 +31,6 @@ function onChange (ev: Event) {
       <input
         type="checkbox"
         name="todo"
-        :value="value"
         :checked="isCompleted"
         class="todo-item__input"
         hidden
@@ -64,6 +62,8 @@ function onChange (ev: Event) {
 
   padding: 20px 23px;
 
+  font-weight: 600;
+
   & label {
     display: flex;
     align-items: center;
@@ -82,6 +82,7 @@ function onChange (ev: Event) {
 }
 .todo-item--is-completed {
   text-decoration: line-through;
+  color: var(--color-dark-grayish-blue2);
 }
 .todo-item:hover .todo-item__remove {
   opacity: 1;

@@ -1,17 +1,9 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import TodoItem from './components/todo-item.vue'
-
-const isCompleted = ref(true)
+import TodoList from './components/todo-list.vue'
 </script>
 
 <template>
-  <TodoItem
-    label="Complete online Javascript course"
-    value="todo"
-    :is-completed="isCompleted"
-    @update:is-completed="isCompleted = $event"
-  />
+  <TodoList />
 </template>
 
 <style scoped>
