@@ -59,8 +59,9 @@ h1 {
   color: var(--color-very-light-gray);
 }
 .container {
+  max-width: 563px;
+  padding: 0 23px;
   margin: 0 auto;
-  max-width: 540px;
 }
 @media screen and (min-width: 1024px) {
   h1 {

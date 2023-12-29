@@ -5,15 +5,12 @@ import IconX from './icons/icon-x.vue'
 interface Props {
   label: string
   isCompleted: boolean
-  hasRemove?: boolean
 }
 interface Emits {
   (ev: 'update:isCompleted', isCompleted: Props['isCompleted']): void
   (ev: 'remove'): void
 }
-withDefaults(defineProps<Props>(), {
-  hasRemove: false
-})
+defineProps<Props>()
 const emit = defineEmits<Emits>()
 
 function onChange (ev: Event) {
@@ -43,7 +40,6 @@ function onChange (ev: Event) {
       {{ label }}
 
       <IconX
-        v-if="hasRemove"
         class="todo-item__remove"
         width="14"
         height="14"
@@ -60,17 +56,14 @@ function onChange (ev: Event) {
   display: flex;
   align-items: center;
 
-  padding: 20px 23px;
+  padding: 20px;
+  padding-right: 18px;
 
-  font-weight: 600;
-
-  background-color: var(--color-background);
-
-  & label {
+  label {
     display: flex;
     align-items: center;
     flex: 1;
-    gap: 30px;
+    gap: 20px;
   }
 }
 .todo-item__input {
@@ -79,7 +72,6 @@ function onChange (ev: Event) {
 .todo-item__remove {
   margin-left: auto;
   cursor: pointer;
-  opacity: 0;
   transition: opacity 0.3s;
 }
 .todo-item--is-completed {
@@ -88,5 +80,14 @@ function onChange (ev: Event) {
 }
 .todo-item:hover .todo-item__remove {
   opacity: 1;
+}
+
+@media screen and (min-width: 1024px) {
+  .todo-item__remove {
+    opacity: 0;
+  }
+  .todo-item label{
+    gap: 30px;
+  }
 }
 </style>

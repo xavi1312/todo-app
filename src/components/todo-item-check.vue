@@ -25,6 +25,7 @@ defineEmits<Emits>()
 
 <style scoped>
 .todo-item-check {
+  aspect-ratio: 1;
   width: 27px;
   height: 27px;
 

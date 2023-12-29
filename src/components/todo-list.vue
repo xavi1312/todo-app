@@ -2,8 +2,10 @@
 import { computed, ref } from 'vue'
 import TodoItem from './todo-item.vue'
 import { useTodosStore } from '../stores/todos-store'
+import CategoryList from './category-list.vue'
+import { type Category } from '../types/category'
 
-const activeFilter = ref<'all'|'active'|'completed'>('all')
+const activeFilter = ref<Category>('all')
 
 const {
   allTodos, activeTodos, completedTodos, setCompleted,
@@ -17,7 +19,7 @@ const todos = computed(() => {
 </script>
 
 <template>
-  <section class="todo-list">
+  <section class="todo-list box">
     <ul>
       <li
         v-for="todo in todos"
@@ -25,7 +27,6 @@ const todos = computed(() => {
       >
         <TodoItem
           v-bind="todo"
-          has-remove
           @update:is-completed="setCompleted(todo.id, $event)"
           @remove="deleteTodo(todo.id)"
         />
@@ -36,29 +37,10 @@ const todos = computed(() => {
         {{ itemsLeft }} items left
       </div>
 
-      <div class="filters-container">
-        <button
-          class="filter"
-          :class="{'filter--is-active': activeFilter === 'all'}"
-          @click.prevent="activeFilter = 'all'"
-        >
-          All
-        </button>
-        <button
-          class="filter"
-          :class="{'filter--is-active': activeFilter === 'active'}"
-          @click.prevent="activeFilter = 'active'"
-        >
-          Active
-        </button>
-        <button
-          class="filter"
-          :class="{'filter--is-active': activeFilter === 'completed'}"
-          @click.prevent="activeFilter = 'completed'"
-        >
-          Completed
-        </button>
-      </div>
+      <CategoryList
+        v-model="activeFilter"
+        class="category-list-desktop"
+      />
 
       <button
         class="button-clear-completed"
@@ -68,13 +50,18 @@ const todos = computed(() => {
       </button>
     </footer>
   </section>
+
+  <CategoryList
+    v-model="activeFilter"
+    class="category-list-mobile box"
+  />
 </template>
 
 <style scoped>
-.todo-list {
+.box {
+  background-color: var(--color-background);
   overflow: hidden;
   border-radius: 8px;
-
   box-shadow: 0 38px 65px -12px rgba(0,0,0,0.16);
 }
 ul {
@@ -91,7 +78,6 @@ li {
 footer {
   display: flex;
   justify-content: space-between;
-  font-size: 15px;
   font-weight: 600;
 
   padding: 20px 23px;
@@ -100,26 +86,6 @@ footer {
   color: var(--color-dark-grayish-blue2);
 }
 
-.filters-container {
-  display: flex;
-  gap: 15px;
-}
-.filter {
-  display: inline-block;
-  padding: 0;
-
-  text-decoration: none;
-  color: var(--color-dark-grayish-blue2);
-
-  background-color: transparent;
-  border: none;
-}
-.filter:hover:not(.filter--is-active) {
-  color: var(--color-very-dark-grayish-blue3);
-}
-.filter--is-active {
-  color: var(--color-bright-blue);
-}
 .button-clear-completed {
   padding: 0;
   color: var(--color-dark-grayish-blue2);
@@ -128,5 +94,27 @@ footer {
 }
 .button-clear-completed:hover {
   color: var(--color-very-dark-grayish-blue3);
+}
+.category-list-mobile {
+  justify-content: center;
+  align-items: center;
+
+  padding: 18px;
+  margin-top: 14px;
+}
+.category-list-desktop {
+  display: none;
+}
+
+@media screen and (min-width: 1024px) {
+  footer {
+    font-size: 15px;
+  }
+  .category-list-mobile {
+    display: none;
+  }
+  .category-list-desktop {
+    display: flex;
+  }
 }
 </style>
