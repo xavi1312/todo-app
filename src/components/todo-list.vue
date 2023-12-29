@@ -5,13 +5,15 @@ import { useTodosStore } from '../stores/todos-store'
 
 const activeFilter = ref<'all'|'active'|'completed'>('all')
 
-const { allTodos, activeTodos, completedTodos, setCompleted, deleteTodo, deleteAllCompletedTodos } = useTodosStore()
+const {
+  allTodos, activeTodos, completedTodos, setCompleted,
+  deleteTodo, deleteAllCompletedTodos, itemsLeft
+} = useTodosStore()
 const todos = computed(() => {
   if (activeFilter.value === 'active') return activeTodos.value
   if (activeFilter.value === 'completed') return completedTodos.value
   return allTodos.value
 })
-const itemsLeft = computed(() => activeTodos.value.length)
 </script>
 
 <template>
@@ -34,28 +36,34 @@ const itemsLeft = computed(() => activeTodos.value.length)
         {{ itemsLeft }} items left
       </div>
 
-      <nav>
-        <a
+      <div class="filters-container">
+        <button
           class="filter"
           :class="{'filter--is-active': activeFilter === 'all'}"
-          href="#"
           @click.prevent="activeFilter = 'all'"
-        >All</a>
-        <a
+        >
+          All
+        </button>
+        <button
           class="filter"
           :class="{'filter--is-active': activeFilter === 'active'}"
-          href="#active"
           @click.prevent="activeFilter = 'active'"
-        >Active</a>
-        <a
+        >
+          Active
+        </button>
+        <button
           class="filter"
           :class="{'filter--is-active': activeFilter === 'completed'}"
-          href="#completed"
           @click.prevent="activeFilter = 'completed'"
-        >Completed</a>
-      </nav>
+        >
+          Completed
+        </button>
+      </div>
 
-      <button @click="deleteAllCompletedTodos">
+      <button
+        class="button-clear-completed"
+        @click="deleteAllCompletedTodos"
+      >
         Clear Completed
       </button>
     </footer>
@@ -87,6 +95,8 @@ li {
 footer {
   display: flex;
   justify-content: space-between;
+  font-size: 15px;
+  font-weight: 600;
 
   padding: 20px 23px;
 }
@@ -94,20 +104,33 @@ footer {
   color: var(--color-dark-grayish-blue2);
 }
 
-nav {
+.filters-container {
   display: flex;
   gap: 15px;
 }
 .filter {
   display: inline-block;
-  font-weight: 600;
+  padding: 0;
+
   text-decoration: none;
   color: var(--color-dark-grayish-blue2);
+
+  background-color: transparent;
+  border: none;
 }
 .filter:hover:not(.filter--is-active) {
   color: var(--color-very-dark-grayish-blue3);
 }
 .filter--is-active {
   color: var(--color-bright-blue);
+}
+.button-clear-completed {
+  padding: 0;
+  color: var(--color-dark-grayish-blue2);
+  border: none;
+  background-color: transparent;
+}
+.button-clear-completed:hover {
+  color: var(--color-very-dark-grayish-blue3);
 }
 </style>

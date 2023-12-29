@@ -59,11 +59,13 @@ export function useTodosStore () {
 
   const completedTodos = computed(() => todos.value.filter(({ isCompleted }) => isCompleted))
   const activeTodos = computed(() => todos.value.filter(({ isCompleted }) => !isCompleted))
+  const itemsLeft = computed(() => activeTodos.value.length)
 
   return {
     allTodos: readonly(todos),
     completedTodos,
     activeTodos,
+    itemsLeft,
     addTodo,
     deleteTodo,
     deleteAllCompletedTodos,
