@@ -66,6 +66,9 @@ function onChange (ev: Event) {
     gap: 20px;
   }
 }
+.todo-item label:hover :deep(.todo-item-check) {
+  background: linear-gradient(120deg, var(--gradient));
+}
 .todo-item__input {
   display: none;
 }

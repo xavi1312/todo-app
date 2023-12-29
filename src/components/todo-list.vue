@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import TodoItem from './todo-item.vue'
-import { useTodosStore } from '../stores/todos-store'
+import { useTodoStore } from '../stores/todo-store'
 import CategoryList from './category-list.vue'
 import { type Category } from '../types/category'
 
@@ -10,7 +10,7 @@ const activeFilter = ref<Category>('all')
 const {
   allTodos, activeTodos, completedTodos, setCompleted,
   deleteTodo, deleteAllCompletedTodos, itemsLeft
-} = useTodosStore()
+} = useTodoStore()
 const todos = computed(() => {
   if (activeFilter.value === 'active') return activeTodos.value
   if (activeFilter.value === 'completed') return completedTodos.value
@@ -19,7 +19,7 @@ const todos = computed(() => {
 </script>
 
 <template>
-  <section class="todo-list box">
+  <div class="todo-list box">
     <ul>
       <li
         v-for="todo in todos"
@@ -49,7 +49,7 @@ const todos = computed(() => {
         Clear Completed
       </button>
     </footer>
-  </section>
+  </div>
 
   <CategoryList
     v-model="activeFilter"
@@ -58,12 +58,6 @@ const todos = computed(() => {
 </template>
 
 <style scoped>
-.box {
-  background-color: var(--color-background);
-  overflow: hidden;
-  border-radius: 8px;
-  box-shadow: 0 38px 65px -12px rgba(0,0,0,0.16);
-}
 ul {
   margin: 0;
   padding-left: 0;
@@ -118,3 +112,4 @@ footer {
   }
 }
 </style>
+../stores/todo-store

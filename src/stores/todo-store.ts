@@ -34,7 +34,7 @@ const todos = ref<Todo[]>([
   }
 ])
 
-export function useTodosStore () {
+export function useTodoStore () {
   function addTodo (todo: Todo) {
     todos.value = [todo, ...todos.value]
   }

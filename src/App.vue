@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import TodoInput from './components/todo-input.vue'
 import TodoList from './components/todo-list.vue'
 </script>
 
@@ -30,7 +31,10 @@ import TodoList from './components/todo-list.vue'
       <header>
         <h1>todo</h1>
       </header>
-      <TodoList />
+      <section>
+        <TodoInput class="todo-input" />
+        <TodoList />
+      </section>
     </div>
   </main>
 </template>
@@ -55,6 +59,7 @@ h1 {
 
   font-size: 50px;
   font-weight: 600;
+  letter-spacing: 12px;
   text-transform: uppercase;
   color: var(--color-very-light-gray);
 }
@@ -63,9 +68,15 @@ h1 {
   padding: 0 23px;
   margin: 0 auto;
 }
+.todo-input {
+  margin-bottom: 16px;
+}
 @media screen and (min-width: 1024px) {
   h1 {
     padding: 60px 0;
+  }
+  .todo-input {
+    margin-bottom: 24px;
   }
 }
 </style>

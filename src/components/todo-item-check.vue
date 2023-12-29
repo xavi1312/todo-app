@@ -32,7 +32,7 @@ defineEmits<Emits>()
   padding: 2px;
 
   border-radius: 50%;
-  background: linear-gradient(120deg, var(--gradient));
+  background: var(--color-very-light-grayish-blue);
 }
 .todo-item-check__inner {
   display: flex;
@@ -46,7 +46,10 @@ defineEmits<Emits>()
   background: #fff;
   transition: background .2s;
 }
-.todo-item-check--is-completed .todo-item-check__inner {
-  background: inherit;
+.todo-item-check--is-completed {
+  background: linear-gradient(120deg, var(--gradient));
+  .todo-item-check__inner {
+    background: inherit;
+  }
 }
 </style>

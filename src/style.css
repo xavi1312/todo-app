@@ -61,6 +61,13 @@ button {
   font-weight: inherit;
 }
 
+.box {
+  background-color: var(--color-background);
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 38px 65px -12px rgba(0,0,0,0.16);
+}
+
 @media screen and (min-width: 1024px) {
   body {
     font-size: 1.125rem;
